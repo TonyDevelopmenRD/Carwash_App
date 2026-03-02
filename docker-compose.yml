@@ -21,6 +21,18 @@ services:
       - db
     env_file:
       - .env
+    volumes:
+      - .:/app
+  
+  test:
+    build: .
+    depends_on:
+      - db
+    env_file:
+      - .env.test
+    volumes:
+      - .:/app
+    command: pytest -v
 
 volumes:
   mysql_data:

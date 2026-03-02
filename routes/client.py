@@ -1,15 +1,18 @@
 # routes/client.py
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+
+from config.db import get_db
 from schemas.client import ClientCreate, ClientRead
 from models import Client
-from config.db import get_db
+
+from middlewares.auth import verify_token_header
 
 router = APIRouter()
 
 # Crear un nuevo cliente
 @router.post("/", response_model=ClientRead)
-def create_client(client: ClientCreate, db: Session = Depends(get_db)):
+def create_client(client: ClientCreate, db: Session = Depends(get_db), current_user: dict = Depends(verify_token_header)):
     db_client = Client(name=client.name, email=client.email, phone=client.phone)
     db.add(db_client)
     db.commit()
@@ -18,12 +21,15 @@ def create_client(client: ClientCreate, db: Session = Depends(get_db)):
 
 # Obtener todos los clientes
 @router.get("/", response_model=list[ClientRead])
-def get_clients(db: Session = Depends(get_db)):
+def get_clients(
+    db: Session = Depends(get_db), 
+    current_user: dict = Depends(verify_token_header)
+):
     return db.query(Client).all()
 
 # Obtener un cliente por ID
 @router.get("/{client_id}", response_model=ClientRead)
-def get_client(client_id: int, db: Session = Depends(get_db)):
+def get_client(client_id: int, db: Session = Depends(get_db), current_user: dict = Depends(verify_token_header)):
     db_client = db.query(Client).filter(Client.id == client_id).first()
     if db_client is None:
         raise HTTPException(status_code=404, detail="Client not found")

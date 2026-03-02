@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from schemas.vehicle import VehicleCreate, VehicleRead
 from models import Vehicle
 from config.db import get_db
-from middlewares.auth import verify_token_header  # Importa la dependencia
+from middlewares.auth import verify_token_header
 
 router = APIRouter()
 
