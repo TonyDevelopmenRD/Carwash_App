@@ -34,7 +34,7 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
     # Crear el token JWT para el nuevo usuario (opcional)
     access_token = create_access_token(data={"sub": db_user.email})
     
-    return {**db_user.__dict__, "access_token": access_token}
+    return db_user;
 
 # Obtener todos los usuarios con paginación
 @router.get("/", response_model=list[UserRead])
