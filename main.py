@@ -1,9 +1,11 @@
+import time
 from fastapi import FastAPI
+
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.exc import OperationalError
+
 from config.db import Base, engine
-from routes import role, user, client, vehicle, service, auth
-import time
+from routes import role, user, client, vehicle, service, auth, products, report
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 
@@ -49,11 +51,13 @@ def startup():
 
 # Routers
 app.include_router(role.router, prefix="/roles", tags=["Roles"])
+app.include_router(auth.router, prefix="/auth", tags=["Auth"])
 app.include_router(user.router, prefix="/users", tags=["Users"])
+app.include_router(report.router, prefix="/reports", tags=["Reports"])
+app.include_router(products.router, prefix="/products", tags=["Products"])
 app.include_router(client.router, prefix="/clients", tags=["Clients"])
 app.include_router(vehicle.router, prefix="/vehicles", tags=["Vehicles"])
 app.include_router(service.router, prefix="/services", tags=["Services"])
-app.include_router(auth.router, prefix="/auth", tags=["Auth"])
 
 
 @app.get("/")
