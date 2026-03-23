@@ -9,6 +9,8 @@ from models.service import Service
 from models.vehicle import Vehicle
 from models.user import User
 
+from middlewares.auth import verify_token_header
+
 router = APIRouter()
 
 
@@ -16,7 +18,8 @@ router = APIRouter()
 def products_report(
     start_date: str | None = Query(None, description="Format: DD/MM/YY"),
     end_date: str | None = Query(None, description="Format: DD/MM/YY"),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(verify_token_header)
 ):
     query = (
         db.query(
