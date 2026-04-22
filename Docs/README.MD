@@ -30,27 +30,38 @@ CapaTecnologíaDescripciónFrontendReact + ViteInterfaz de usuarioBackendFastAPI
   </tr>
 </table>
 
+
+
 **Backend (FastAPI)**
 El backend fue desarrollado utilizando FastAPI, un framework moderno de Python orientado a la creación de APIs REST. Este componente se encarga de gestionar la lógica del sistema, incluyendo la autenticación de usuarios, el procesamiento de solicitudes y la comunicación con la base de datos.
 Para garantizar la seguridad y la correcta configuración del sistema, se implementó el uso de variables de entorno, las cuales permiten almacenar información sensible como credenciales de la base de datos y claves secretas sin exponerlas directamente en el código fuente.
 Variables de entorno
+<p align="center">
 <img src="/Docs/assets/env.png" width="500">
+</p>
+
 **Endpoints principales**
 Métodos POST, GET, DELETE, UPDATE — endpoints de autenticación de login, obtención de usuarios y creación de usuarios.
+<p align="center">
 <img src="/Docs/assets/PGDU.png" width="600">
+</p>
+
 **Autenticación**
 Se utiliza una clave secreta (SECRET_KEY) para gestionar la seguridad del sistema.
 Base de datos
 El backend se conecta a MySQL utilizando variables de entorno.
+<p align="center">
 <img src="/Docs/assets/BD_env.png" width="500">
-
+</p>
 
 **Scripts incluidos**
 
 init_db.py → crea las tablas
 populate_db.py → inserta datos
 
+<p align="center">
 <img src="/Docs/assets/Scripts_Include.png" width="600">
+</p>
 
 **Frontend (React + Vite)**
 El frontend fue desarrollado con React utilizando Vite como herramienta de desarrollo.
@@ -65,36 +76,48 @@ Login de usuario y consumo de API mediante axios con credenciales.
 
 **Docker**
 Docker permite ejecutar el sistema en contenedores, facilitando su despliegue. Los servidores dentro del contenedor están activos (punto verde).
+<p align="center">
 <img src="/Docs/assets/Docker.png" width="600">
+</p>
 
 **Ejecución del Sistema**
 1. Backend (Python - FastAPI)
 Instala todas las librerías necesarias definidas en requirements.txt:
 bashcd car-wash-api
 python -m pip install -r requirements.txt
+<p align="center">
 <img src="/Docs/assets/Download_Req.png" width="650">
 <img src="/Docs/assets/requirements.png" width="600">
+</p>
 
 2. Frontend (React - Node.js)
 bashcd Frontend
 npm install
+<p align="center">
 <img src="/Docs/assets/Dependens.png" width="600">
+</p>
+
 Modo desarrollo (opcional) — permite visualizar la interfaz en tiempo real:
 bashnpm run dev
+<p align="center">
 <img src="/Docs/assets/Mod_Desarrollo.png" width="600">
+</p>
 
 3. Ejecución completa con Docker
 Para ejecutar el sistema completo (frontend, backend y base de datos):
 bashdocker-compose up --build
+<p align="center">
 <img src="/Docs/assets/ejecution.png" width="600">
-¿Qué hace este comando?
+</p>
+**¿Qué hace este comando?**
 
 Construye las imágenes necesarias a partir de los archivos Dockerfile
 Crea y levanta los contenedores del sistema
 Configura la comunicación entre servicios (backend, frontend y base de datos)
 Ejecuta el sistema en un entorno aislado
-
+<p align="center">
 <img src="/Docs/assets/image_Docker.png" width="600">
+</p>
 
 Nota: Durante la ejecución, Docker descarga automáticamente las imágenes base necesarias (Python para el backend, Node.js para el frontend), lo que permite estandarizar el entorno de desarrollo y facilitar la portabilidad del sistema.
 
@@ -102,23 +125,33 @@ Nota: Durante la ejecución, Docker descarga automáticamente las imágenes base
 **Funcionamiento del Sistema**
 API (Swagger)
 👉 http://localhost:8000/docs
+<p align="center">
 <img src="/Docs/assets/API1.png" width="600">
 <img src="/Docs/assets/API2.png" width="600">
 <img src="/Docs/assets/API3.png" width="600">
 <img src="/Docs/assets/API4.png" width="600">
+</p>
+
 Documentación interactiva de la API donde se visualizan los endpoints disponibles del sistema.
-Crear usuario / Login
+**Crear usuario / Login**
 Crea un usuario y autentica por user/login en el Backend para poder ingresar con las credenciales al Frontend:
+<p align="center">
 <img src="/Docs/assets/create_user.png" width="700">
+</p>
 
 **Frontend en Ejecución**
 Accede en: http://localhost:5173/
 Se redirige al login de app-carwash. Ingresa los datos obtenidos de la autenticación del backend:
+<p align="center">
 <img src="/Docs/assets/Login_user.png" width="310">
+</p>
 
 **Dashboard**
 El Dashboard es la pantalla principal del sistema y sirve para ver rápidamente el estado general del carwash.
+<p align="center">
 <img src="/Docs/assets/Dashboard.png" width="900">
+</p>
+
 **Datos mostrados:**
 
 Número de usuarios
@@ -133,27 +166,30 @@ Servicios en proceso
 Servicios completados
 Ingresos generados
 
-También incluye accesos rápidos para crear usuarios, citas o servicios sin navegar por todo el sistema.
-
 **Módulo de Usuarios**
 Permite administrar las cuentas del sistema, controlar quién puede acceder y qué rol tiene.
+<p align="center">
 <img src="/Docs/assets/module_users.png" width="700">
-En esta pantalla se puede:
+</p>
 
+**En esta pantalla se puede:**
 Ver la lista de usuarios registrados
 Buscar usuarios por nombre
 Registrar un nuevo usuario con el botón + Nuevo Usuario
 Visualizar: ID, Nombre, Email, Rol y Estado
-
+<p align="center">
 <img src="/Docs/assets/insert_user.png" width="700">
-
+</p>
 Si no hay usuarios, el sistema muestra el mensaje "No se encontraron usuarios".
+
 
 
 **Módulo de Servicios**
 Permite gestionar los servicios que ofrece el car wash (lavado básico, premium, encerado, entre otros).
+<p align="center">
 <img src="/Docs/assets/modulo_services.png" width="700">
 <img src="/Docs/assets/insert_service.png" width="900">
+</p>
 En esta sección se puede:
 Ver la lista de servicios disponibles
 Registrar un nuevo servicio
@@ -163,31 +199,38 @@ Eliminar servicios
 Cada servicio forma parte del catálogo utilizado al momento de crear citas.
 
 **Módulo de Productos**
+<p align="center">
 <img src="/Docs/assets/productos.png" width="900">
-**Tabla de productos:**
+</p>
 
+**Tabla de productos:**
 Lista todos los productos con columnas: ID, Producto, Tipo, Cantidad
 Filtros por categorías y barra de búsqueda global
 
-Historial de Movimientos (panel derecho):
+**Historial de Movimientos (panel derecho):**
 
 Muestra entradas y salidas de stock
 Columnas: Producto, Tipo, Cantidad
 
-Acciones disponibles:
+**Acciones disponibles:**
 
 + Nuevo Producto — Abre un modal con campos: Nombre, Categoría, Stock inicial y Descripción
 Registrar Movimiento — Para registrar cuando se usa o repone un producto
-
+<p align="center">
 <img src="/Docs/assets/insertamos_products.png" width="900">
+</p>
 
 **Módulo de Vehículos**
+<p align="center">
 <img src="/Docs/assets/modulo_vehicle.png" width="900">
+</p>
 El módulo de Vehículos permite administrar todos los vehículos registrados en el sistema. Cada vehículo se identifica con un ID de placa en formato alfanumérico (ej. CD-495-TX) y está vinculado a un dueño específico.
+<p align="center">
 <img src="/Docs/assets/insert_vehicle.png" width="900">
+</p>
 La vista principal muestra todos los vehículos en una tabla con filtros rápidos por estado. Desde cada registro se pueden ejecutar acciones como editar o eliminar. La tabla cuenta con paginación para manejar grandes volúmenes de datos.
 
-📝 Conclusión
+**Conclusión**
 La aplicación de Carwash se encuentra en un estado funcional con un avance aproximado del 70% al 80%. Aún quedan algunas mejoras por implementar, principalmente en el apartado de citas y en la incorporación de ciertas validaciones.
 A pesar de ello, el proyecto muestra una estructura sólida y una integración clara entre el frontend y el backend, lo que permite gestionar correctamente operaciones como el registro de vehículos y movimientos.
 Próximas mejoras:
