@@ -231,6 +231,7 @@ El módulo de Vehículos permite administrar todos los vehículos registrados en
 La vista principal muestra todos los vehículos en una tabla con filtros rápidos por estado. Desde cada registro se pueden ejecutar acciones como editar o eliminar. La tabla cuenta con paginación para manejar grandes volúmenes de datos.
 
 **Conclusión**
+
 La aplicación de Carwash se encuentra en un estado funcional con un avance aproximado del 70% al 80%. Aún quedan algunas mejoras por implementar, principalmente en el apartado de citas y en la incorporación de ciertas validaciones.
 A pesar de ello, el proyecto muestra una estructura sólida y una integración clara entre el frontend y el backend, lo que permite gestionar correctamente operaciones como el registro de vehículos y movimientos.
 Próximas mejoras:
