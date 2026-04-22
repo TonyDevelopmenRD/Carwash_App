@@ -1,5 +1,5 @@
 from fastapi import HTTPException, Request, status, Depends
-from core.security import verify_token  # La función que decodifica el token y lo valida
+from core.security import verify_token
 
 def verify_token_header(request: Request):
     authorization: str = request.headers.get("Authorization")

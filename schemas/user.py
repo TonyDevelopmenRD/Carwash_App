@@ -1,6 +1,6 @@
-# schemas/user.py
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
+from typing import Optional
 from schemas.role import RoleRead
 
 class UserBase(BaseModel):
@@ -9,23 +9,21 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str
-    role_id: int
+    role_id: int = 1
 
 class UserRead(UserBase):
     id: int
-    role: RoleRead | None
-    created_at: datetime
-    updated_at: datetime
+    role: RoleRead | None = None
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
 
     class Config:
         from_attributes = True
 
-# Esquema para el inicio de sesión (UserLogin)
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
 
-# Esquema para el token de autenticación
 class Token(BaseModel):
     access_token: str
     token_type: str

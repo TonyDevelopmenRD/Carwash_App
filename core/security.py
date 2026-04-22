@@ -33,7 +33,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 
 # Configuración de JWT
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30  # Tiempo de expiración del token (en minutos)
+ACCESS_TOKEN_EXPIRE_MINUTES = 600  # Tiempo de expiración del token (en minutos)
 
 # Función para crear un token JWT
 def create_access_token(data: dict, expires_delta: timedelta = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)) -> str:

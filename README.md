@@ -102,7 +102,7 @@ DB_USER=root
 DB_PASSWORD=1234
 DB_NAME=db_car_wash
 DB_HOST=127.0.0.1
-DB_PORT=3306
+DB_PORT=3307
 ```
 
 Make sure you have a running MySQL server locally.
@@ -174,10 +174,6 @@ car-wash-api/
 * Tables are created automatically on startup
 
 ---
-
-# 🔥 Author
-
-**El yisus dev**
 
 ### tomorrow
 

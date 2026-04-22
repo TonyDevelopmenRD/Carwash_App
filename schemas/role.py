@@ -1,6 +1,7 @@
 # schemas/role.py
 from pydantic import BaseModel
 from datetime import datetime
+from typing import Optional
 
 class RoleBase(BaseModel):
     name: str
@@ -11,8 +12,8 @@ class RoleCreate(RoleBase):
 
 class RoleRead(RoleBase):
     id: int
-    created_at: datetime
-    updated_at: datetime
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
 
     class Config:
         from_attributes = True

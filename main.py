@@ -1,6 +1,6 @@
 import time
 from fastapi import FastAPI
-
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.exc import OperationalError
 
@@ -11,17 +11,30 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 
 app = FastAPI(
     title="Car Wash API",
+    description="API REST para la gestión de un sistema de autolavado. Permite administrar usuarios, roles, clientes, vehículos y servicios.",
     version="1.0.0",
+    contact={
+        "name": "Tony CR",
+        "email": "tu_correo@example.com"
+    },
     openapi_tags=[
         {"name": "Roles", "description": "Operaciones relacionadas con los roles"},
         {"name": "Users", "description": "Operaciones relacionadas con los usuarios"},
     ]
 )
 
+# CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://localhost:5174"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # 🔥 STARTUP REAL (espera a MySQL)
 @app.on_event("startup")
 def startup():
-
     retries = 10
     for i in range(retries):
         try:
@@ -34,10 +47,8 @@ def startup():
     else:
         raise Exception("Database connection failed")
 
-    # Configuración OpenAPI (lo que ya tenías)
     if not app.openapi_schema:
         app.openapi_schema = app.openapi()
-
         app.openapi_schema["components"]["securitySchemes"] = {
             "BearerAuth": {
                 "type": "http",
@@ -45,7 +56,6 @@ def startup():
                 "bearerFormat": "JWT",
             }
         }
-
         app.openapi_schema["security"] = [{"BearerAuth": []}]
 
 

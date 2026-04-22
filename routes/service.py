@@ -1,4 +1,4 @@
-# routes/service.py
+# routes/services.py
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from schemas.service import ServiceCreate, ServiceRead

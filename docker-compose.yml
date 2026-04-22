@@ -5,9 +5,9 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 1234
-      MYSQL_DATABASE: db_car_wash
+      MYSQL_DATABASE: carwash_app
     ports:
-      - "3307:3306"
+      - "3308:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
@@ -15,6 +15,8 @@ services:
       interval: 5s
       retries: 10
       timeout: 5s
+    networks:
+      - carwash_net
 
   api:
     build: .
@@ -26,9 +28,25 @@ services:
       db:
         condition: service_healthy
     env_file:
-      - .env
+      - .env.test
     volumes:
       - .:/app
+    networks:
+      - carwash_net
+
+  frontend:
+    build: ./frontend
+    container_name: carwash_frontend
+    restart: always
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - carwash_net
 
   test:
     build: .
@@ -40,6 +58,12 @@ services:
     volumes:
       - .:/app
     command: pytest -v
+    networks:
+      - carwash_net
 
 volumes:
   mysql_data:
+
+networks:
+  carwash_net:
+    driver: bridge
