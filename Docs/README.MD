@@ -43,6 +43,8 @@ Se utiliza una clave secreta (SECRET_KEY) para gestionar la seguridad del sistem
 Base de datos
 El backend se conecta a MySQL utilizando variables de entorno.
 <img src="/Docs/assets/BD_env.png" width="500">
+
+
 **Scripts incluidos**
 
 init_db.py → crea las tablas
